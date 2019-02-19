@@ -19,3 +19,6 @@ RUN natbpsrv bpid=natbp \
     && natural batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
     && rm /tmp/cmd \
     && cat /tmp/out && rm /tmp/out
+
+# Set the user to root
+USER root
