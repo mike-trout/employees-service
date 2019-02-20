@@ -22,3 +22,6 @@ RUN natbpsrv bpid=natbp \
 
 # Set the user to root
 USER root
+
+# Run the customised entrypoint.sh that also starts the python service
+ENTRYPOINT [ "entrypoint.sh" ]
