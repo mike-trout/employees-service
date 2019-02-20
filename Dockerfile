@@ -18,7 +18,7 @@ USER sagadmin
 # and the check the output of catall and remove the temporary file
 RUN natbpsrv bpid=natbp \
     && ftouch lib=main sm -s -d \
-    && printf "LOGON MAIN\nCATALL ** ALL ** CATALOG\nFIN\n" > /tmp/cmd \
+    && printf "LOGON MAIN\nCATALL ** ALL TYPES ** CATALOG\nFIN\n" > /tmp/cmd \
     && natural batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
     && rm /tmp/cmd \
     && cat /tmp/out && rm /tmp/out
