@@ -24,7 +24,7 @@ def list_employees():
     return f.read()
 
 
-@app.route("/<str:personnelId>", methods=["GET"])
+@app.route("/<personnelId>", methods=["GET"])
 def get_employee(personnelId):
     if os.path.exists(serviceOutput):
         os.remove(serviceOutput)
