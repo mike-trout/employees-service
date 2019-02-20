@@ -4,6 +4,9 @@ FROM miketrout/natural-service-base:0.1.0
 # Copy the Natural source code into the custom fuser
 COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
 
+# Copy ./service to /service
+COPY --chown=sagadmin ./service /service
+
 # Set the user to sagadmin
 USER sagadmin
 

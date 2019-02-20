@@ -1,0 +1,73 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+************************************************************************
+/** Get an employee by personnel id.
+**
+/** :author Mike Trout on 20 Feb 2019
+**
+************************************************************************
+DEFINE DATA
+LOCAL
+*
+* Views
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 FULL-NAME
+    3 FIRST-NAME
+    3 MIDDLE-I
+    3 NAME
+  2 MIDDLE-NAME
+  2 MAR-STAT
+  2 SEX
+  2 BIRTH
+  2 FULL-ADDRESS
+    3 C*ADDRESS-LINE
+    3 ADDRESS-LINE (1:4)
+    3 CITY
+    3 ZIP
+    3 POST-CODE
+    3 COUNTRY
+  2 TELEPHONE
+    3 AREA-CODE
+    3 PHONE
+  2 DEPT
+  2 JOB-TITLE
+*
+* Variables
+*
+1 #A-SERVICE-INPUT (A) DYNAMIC
+1 #A-JSON (A) DYNAMIC
+*
+END-DEFINE
+*
+/* Read the service input
+DEFINE WORK FILE 1 '/tmp/service.in' TYPE 'UNFORMATTED'
+READ WORK FILE 1 ONCE #A-SERVICE-INPUT
+CLOSE WORK FILE 1
+*
+/* Compose the response
+COMPRESS FULL '{ '-H'22'-'employee'-H'22'-':{ ' INTO #A-JSON
+FIND (1) EMPLOYEES WITH PERSONNEL-ID = #A-SERVICE-INPUT
+  COMPRESS FULL #A-JSON
+    H'22'-'personnel-id'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.PERSONNEL-ID) H'22'-', '-
+    H'22'-'first-name'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.FIRST-NAME) H'22'-', '-
+    H'22'-'middle-i'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.MIDDLE-I) H'22'-', '-
+    H'22'-'name'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.NAME) H'22'
+    INTO #A-JSON LEAVING NO
+END-FIND
+COMPRESS FULL #A-JSON '} }' INTO #A-JSON LEAVING NO
+*
+/* Write the service output
+DEFINE WORK FILE 1 '/tmp/service.out' TYPE 'UNFORMATTED'
+WRITE WORK FILE 1 VARIABLE #A-JSON
+CLOSE WORK FILE 1
+*
+END
