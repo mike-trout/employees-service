@@ -54,13 +54,13 @@ CLOSE WORK FILE 1
 COMPRESS FULL '{ '-H'22'-'employee'-H'22'-':{ ' INTO #A-JSON
 FIND (1) EMPLOYEES WITH PERSONNEL-ID = #A-PERSONNEL-ID
   COMPRESS FULL #A-JSON
-    H'22'-'personnel-id'-H'22'-':'-H'22'
+    H'22'-'personnelId'-H'22'-':'-H'22'
     *TRIM(EMPLOYEES.PERSONNEL-ID) H'22'-', '-
-    H'22'-'first-name'-H'22'-':'-H'22'
+    H'22'-'firstName'-H'22'-':'-H'22'
     *TRIM(EMPLOYEES.FIRST-NAME) H'22'-', '-
-    H'22'-'middle-name'-H'22'-':'-H'22'
+    H'22'-'middleName'-H'22'-':'-H'22'
     *TRIM(EMPLOYEES.MIDDLE-NAME) H'22'-', '-
-    H'22'-'name'-H'22'-':'-H'22'
+    H'22'-'lastName'-H'22'-':'-H'22'
     *TRIM(EMPLOYEES.NAME) H'22'
     INTO #A-JSON LEAVING NO
 END-FIND
