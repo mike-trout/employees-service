@@ -7,6 +7,8 @@ COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
 # Copy ./service to /service
 COPY --chown=sagadmin ./service /service
 
+RUN pip install -U flask-cors
+
 # Set the user to sagadmin
 USER sagadmin
 
