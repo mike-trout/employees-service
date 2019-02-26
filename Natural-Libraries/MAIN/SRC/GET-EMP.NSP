@@ -16,21 +16,15 @@ LOCAL
 *
 1 EMPLOYEES VIEW OF EMPLOYEES
   2 PERSONNEL-ID
-  2 FULL-NAME
-    3 FIRST-NAME
-*     3 MIDDLE-I
-    3 NAME
-  2 MIDDLE-NAME
-*   2 MAR-STAT
-*   2 SEX
-*   2 BIRTH
-*   2 FULL-ADDRESS
-*     3 C*ADDRESS-LINE
-*     3 ADDRESS-LINE (1:4)
-*     3 CITY
-*     3 ZIP
-*     3 POST-CODE
-*     3 COUNTRY
+  2 SEX
+  2 BIRTH
+  2 FULL-ADDRESS
+    3 C*ADDRESS-LINE
+    3 ADDRESS-LINE (1:4)
+    3 CITY
+    3 ZIP
+    3 POST-CODE
+    3 COUNTRY
 *   2 TELEPHONE
 *     3 AREA-CODE
 *     3 PHONE
@@ -39,8 +33,9 @@ LOCAL
 *
 * Variables
 *
-1 #A-PERSONNEL-ID (A8)
+1 #A-BIRTH (A10)
 1 #A-JSON (A) DYNAMIC
+1 #A-PERSONNEL-ID (A8)
 *
 END-DEFINE
 *
@@ -53,15 +48,18 @@ CLOSE WORK FILE 1
 /* Compose the response
 COMPRESS FULL '{ '-H'22'-'employee'-H'22'-':{ ' INTO #A-JSON
 FIND (1) EMPLOYEES WITH PERSONNEL-ID = #A-PERSONNEL-ID
+  MOVE EDITED EMPLOYEES.BIRTH (EM=YYYY'-'MM'-'DD) TO #A-BIRTH
   COMPRESS FULL #A-JSON
-    H'22'-'personnel-id'-H'22'-':'-H'22'
+    H'22'-'personnelId'-H'22'-':'-H'22'
     *TRIM(EMPLOYEES.PERSONNEL-ID) H'22'-', '-
-    H'22'-'first-name'-H'22'-':'-H'22'
-    *TRIM(EMPLOYEES.FIRST-NAME) H'22'-', '-
-    H'22'-'middle-name'-H'22'-':'-H'22'
-    *TRIM(EMPLOYEES.MIDDLE-NAME) H'22'-', '-
-    H'22'-'name'-H'22'-':'-H'22'
-    *TRIM(EMPLOYEES.NAME) H'22'
+    H'22'-'gender'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.SEX) H'22'-', '-
+    H'22'-'dateOfBirth'-H'22'-':'-H'22'
+    *TRIM(#A-BIRTH) H'22'-', '-
+    H'22'-'addressLine1'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.ADDRESS-LINE(1)) H'22'-', '-
+    H'22'-'addressLine2'-H'22'-':'-H'22'
+    *TRIM(EMPLOYEES.ADDRESS-LINE(2)) H'22'
     INTO #A-JSON LEAVING NO
 END-FIND
 COMPRESS FULL #A-JSON '} }' INTO #A-JSON LEAVING NO
