@@ -5,10 +5,8 @@ import subprocess
 from flask import abort
 from flask import Flask
 from flask import Response
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 serviceOutput = "/tmp/service.out"
 
 
