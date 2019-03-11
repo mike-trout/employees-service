@@ -8,14 +8,14 @@ COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
 COPY --chown=sagadmin ./service /service
 
 # Set the user to sagadmin
-USER sagadmin
+# USER sagadmin
 
 # Start the buffer pool
 # and then run the ftouch utility to build a new FILEDIR.SAG
 # and then set up a command file to CATALL library MAIN
 # and then start Natural in batch mode and run the command file
 # and then remove the command file
-# and the check the output of catall and remove the temporary file
+# and then check the output of catall and remove the temporary file
 RUN natbpsrv bpid=natbp \
     && ftouch lib=main sm -s -d \
     && printf "LOGON MAIN\nCATALL ** ALL TYPES ** CATALOG\nFIN\n" > /tmp/cmd \
@@ -24,7 +24,7 @@ RUN natbpsrv bpid=natbp \
     && cat /tmp/out && rm /tmp/out
 
 # Set the user to root
-USER root
+# USER root
 
 # Run the customised entrypoint.sh that also starts the python service
-ENTRYPOINT [ "entrypoint.sh" ]
+# ENTRYPOINT [ "entrypoint.sh" ]
