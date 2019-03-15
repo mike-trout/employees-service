@@ -4,6 +4,7 @@ import subprocess
 
 from flask import abort
 from flask import Flask
+from flask import request
 from flask import Response
 
 app = Flask(__name__)
@@ -14,6 +15,14 @@ serviceOutput = "/tmp/service.out"
 def list_employees():
     if os.path.exists(serviceOutput):
         os.remove(serviceOutput)
+    f = open("/tmp/service.in", "w")
+    start = request.args.get("s")
+    number = request.args.get("n")
+    if start != "":
+        f.write("s=" + start)
+    if number != "":
+        f.write("n=" + number)
+    f.close()
     p = subprocess.Popen("natural madio=0 batchmode cmsynin=/service/list_employees.cmd cmobjin=/service/list_employees.cmd cmprint=/tmp/out natlog=err",
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     retval = p.wait()
