@@ -19,9 +19,9 @@ def list_employees():
     start = request.args.get("s")
     number = request.args.get("n")
     if start != "":
-        f.write("s=" + start)
+        f.write("s=" + start + "\n")
     if number != "":
-        f.write("n=" + number)
+        f.write("n=" + number + "\n")
     f.close()
     p = subprocess.Popen("natural madio=0 batchmode cmsynin=/service/list_employees.cmd cmobjin=/service/list_employees.cmd cmprint=/tmp/out natlog=err",
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
