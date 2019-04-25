@@ -3,6 +3,20 @@
 * :CP
 * :LineIncrement 10
 * <Natural Source Header
+************************************************************************
+/** List employee records by personnel id.
+**
+/** <p>The input to the program is a file located at
+/** <code>/tmp/service.in</code>.</p>
+**
+/** <p>The input can contain the s={start} and n={number} options.
+/** Where {start} is an integer specifying the number of records to
+/** skip before the first record to be returned. And {number} is an
+/** integer specifying the number of records to be returned.</p>
+**
+/** :author Mike Trout on 20 Feb 2019
+**
+************************************************************************
 DEFINE DATA
 LOCAL
 *
