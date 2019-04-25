@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adabas-db
+spec:
+  type: ClusterIP
+  selector:
+    app: adabas-db
+  ports:
+  - protocol: TCP
+    port: 60001
+    targetPort: 60001

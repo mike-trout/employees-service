@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adabas-db-deployment
+  labels:
+    app: adabas-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adabas-db
+  template:
+    metadata:
+      labels:
+        app: adabas-db
+    spec:
+      containers:
+      - name: adabas-db
+        image: store/softwareag/adabas-ce:6.7.0
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 100m
+          limits:
+            memory: 200Mi
+            cpu: 200m
+        ports:
+        - containerPort: 60001
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: ADADBID
+          value: "12"
+        - name: ADA_DB_CREATION
+          value: "demodb"
+      imagePullSecrets:
+      - name: regcred
