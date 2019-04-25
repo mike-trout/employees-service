@@ -1,14 +1,11 @@
-# Use the Natural CE image as a parent image
-FROM miketrout/natural-service-base:0.1.0
+# Use the natural-service-base image as a parent image
+FROM miketrout/natural-service-base
 
 # Copy the Natural source code into the custom fuser
-COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
+COPY ./Natural-Libraries/MAIN /fuser/MAIN
 
 # Copy ./service to /service
 COPY ./service /service
-
-# Set the user to sagadmin
-# USER sagadmin
 
 # Start the buffer pool
 # and then run the ftouch utility to build a new FILEDIR.SAG
@@ -22,9 +19,3 @@ RUN natbpsrv bpid=natbp \
     && natural batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
     && rm /tmp/cmd \
     && cat /tmp/out && rm /tmp/out
-
-# Set the user to root
-# USER root
-
-# Run the customised entrypoint.sh that also starts the python service
-# ENTRYPOINT [ "entrypoint.sh" ]
