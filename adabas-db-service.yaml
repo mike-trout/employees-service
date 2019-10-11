@@ -8,6 +8,7 @@ spec:
   selector:
     app: adabas-db
   ports:
-  - protocol: TCP
-    port: 60001
-    targetPort: 60001
+    - name: db-port
+      protocol: TCP
+      port: 60001
+      targetPort: db-port
