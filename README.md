@@ -64,6 +64,6 @@ kubectl apply \
 -f https://raw.githubusercontent.com/mike-trout/employees-service/master/employees-service.yaml
 ```
 
-The service is exposed as a `ClusterIp`.
+The service is exposed as a `NodePort`.
 
 You must set up the `regcred` secret on your Kubernetes cluster to be able to pull the `store/softwareag/adabas-ce:6.7.0` image from the Docker Hub private repository. See the [official Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry) for details.
