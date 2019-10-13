@@ -17,6 +17,7 @@ def list_employees():
         os.remove(serviceOutput)
     start = request.args.get("s")
     number = request.args.get("n")
+    # Need unique filenames to handle multiple requests
     f = open("/tmp/service.in", "w")
     if not start is None:
         f.write("s=" + start + "\n")
@@ -24,7 +25,7 @@ def list_employees():
         f.write("n=" + number + "\n")
     f.write("\n")
     f.close()
-    p = subprocess.Popen("natural madio=0 batchmode cmsynin=/service/list_employees.cmd cmobjin=/service/list_employees.cmd cmprint=/tmp/out natlog=err",
+    p = subprocess.Popen("natural etid=$$ madio=0 batchmode cmsynin=/service/list_employees.cmd cmobjin=/service/list_employees.cmd cmprint=/tmp/out natlog=err",
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     retval = p.wait()
     if retval != 0:
@@ -38,10 +39,11 @@ def list_employees():
 def get_employee(personnelId):
     if os.path.exists(serviceOutput):
         os.remove(serviceOutput)
+    # Need unique filenames to handle multiple requests
     f = open("/tmp/service.in", "w")
     f.write(personnelId)
     f.close()
-    p = subprocess.Popen("natural madio=0 batchmode cmsynin=/service/get_employee.cmd cmobjin=/service/get_employee.cmd cmprint=/tmp/out natlog=err",
+    p = subprocess.Popen("natural etid=$$ madio=0 batchmode cmsynin=/service/get_employee.cmd cmobjin=/service/get_employee.cmd cmprint=/tmp/out natlog=err",
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     retval = p.wait()
     if retval != 0:
