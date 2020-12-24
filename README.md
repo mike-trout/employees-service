@@ -1,5 +1,7 @@
 # employees-service
 
+[![Build Status](https://travis-ci.com/mike-trout/employees-service.svg?branch=master)](https://travis-ci.com/mike-trout/employees-service)
+
 Demo employees REST service using `miketrout/natural-service-base` as the parent image.
 
 The service is based on Python and Flask and it runs Software AG Natural code to list and get records from the demo EMPLOYEES database.
