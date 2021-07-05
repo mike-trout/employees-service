@@ -29,9 +29,9 @@ def list_employees():
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     retval = p.wait()
     if retval != 0:
-        print("Error: Natural returned with code " + retval)
+        print("Error: Natural returned with code " + str(retval))
         abort(500)
-        abort(Response("Natural returned with code " + retval))
+        abort(Response("Natural returned with code " + str(retval)))
     f = open(serviceOutput, "r")
     return f.read()
 
@@ -48,9 +48,9 @@ def get_employee(personnelId):
                          shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     retval = p.wait()
     if retval != 0:
-        print("Error: Natural returned with code " + retval)
+        print("Error: Natural returned with code " + str(retval))
         abort(500)
-        abort(Response("Natural returned with code " + retval))
+        abort(Response("Natural returned with code " + str(retval)))
     f = open(serviceOutput, "r")
     return f.read()
 
